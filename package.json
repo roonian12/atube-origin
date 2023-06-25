@@ -1,0 +1,30 @@
+{
+  "name": "atube",
+  "version": "1.0.0",
+  "description": "test project about node js, npm, express",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon babel-node src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/roonian12/atube-origin.git"
+  },
+  "author": "roonian12",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/roonian12/atube-origin/issues"
+  },
+  "homepage": "https://github.com/roonian12/atube-origin#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.22.5",
+    "@babel/node": "^7.22.5",
+    "@babel/preset-env": "^7.22.5",
+    "nodemon": "^2.0.22"
+  },
+  "type": "module"
+}
