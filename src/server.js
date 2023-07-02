@@ -2,17 +2,25 @@
 import express from "express" // ES 6 스타일. 이건 Babel이 해줌.
 import morgan from "morgan"
 
-const app = express()
-const port = 3000
-const logger = morgan("combined")
+const app = express();
+const port = 3000;
+const logger = morgan("dev");
+
+app.use(logger);
+
+const middleWare = (req, res, next) =>{
+  console.log(`LOGGED`);
+  next(); // 서버가 요청을 걸러내는 것
+};
+
 
 const home = (req, res) => { // request : 브라우저에 요청한 정보. response : 브라우저에서 응답하는 정보. next : 사용하지 않으므로 넣지 않음.
   console.log('home')
-  res.send('handle home')
+  res.send('Hello World! nodemon watching!')
   // res.end() // 응답에 대한 요청을 주지 않고 끝내는 방법. localhost:3000에서 확인해보면 아무 응답도 없음.
 }
-app.use(logger) // use가 먼저 오고 get을 줘야함. response send를 하면 끝나기 때문에 순서 중요. 
-app.get('/', home)
+app.use(middleWare); // use가 먼저 오고 get을 줘야함. response send를 하면 끝나기 때문에 순서 중요. 
+app.get('/', home);
 
 app.listen(port, () => { // 언제 요청이 올 지 모르니까 계속 listening을 하고 있다.
   console.log(`Example app listening on port ${port}`)

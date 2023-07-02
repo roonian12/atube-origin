@@ -4,7 +4,7 @@
   "description": "test project about node js, npm, express",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon babel-node src/server.js"
+    "dev": "nodemon --exec babel-node src/server.js"
   },
   "repository": {
     "type": "git",
