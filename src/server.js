@@ -56,7 +56,8 @@ app.use('/', globalRouter); // router를 import하기 때문에 app.get이 아�
 // 한 번 globalRouter 분기 처리가 되면 아래에는 router로 연결된다.
 // app.get('/join', handleJoin) // handleJoin을 join이라는 url을 매핑시킨 것.
 app.use('/users', userRouter);
-app.use('/videos', userRouter);
+// app.use('/videos', userRouter);
+app.use('/videos', videoRouter);
 /*
 app.get('/users/edit', handleUserEdit)
 app.get('/users/remove', handleUserRemove)
