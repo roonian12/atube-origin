@@ -1,4 +1,11 @@
-export const trendings = (req, res) => res.send("trendings {videoController}");
+
+const mockUser = {
+    username : "bnb",
+    loggedIn : true
+}
+
+export const trendings = (req, res) => res.render("home", { pageTitle : "Home", mockUser});
+// templates engine에게 맡기려면 send가 아니라 render 함수를 사용한다. base.pug를 인자로 호출한다.
 export const search = (req, res) => res.send("search video!! {videoController}");
 
 export const upload = (req, res) => res.send("upload video!! {videoController}");

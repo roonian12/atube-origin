@@ -10,6 +10,10 @@ const app = express();
 const port = 80
 const logger = morgan("dev");
 
+// console.log('process.cwd() ::: %s',process.cwd()); <= 이건 내가 오류 났을 때 오류를 알아보기 위해 적은 것.
+// 미들웨어는 순서가 중요하기 때문에 logger 앞에 pug를 설정하였다.
+app.set('views', process.cwd() + '/src/views');
+app.set('view engine', 'pug');
 app.use(logger);
 
 const middleWare = (req, res, next) =>{
