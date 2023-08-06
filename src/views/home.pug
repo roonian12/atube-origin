@@ -1,4 +1,10 @@
 extends base.pug
+include mixins/video.pug
 
 block content
-  h1 trendings block
+  h1 Welcome Btube #{videos.length}
+  ul
+    each v in videos
+      +video(v)
+    else 
+      li Sorry nothing found.

@@ -16,10 +16,12 @@ app.set('views', process.cwd() + '/src/views');
 app.set('view engine', 'pug');
 app.use(logger);
 
+/*
 const middleWare = (req, res, next) =>{
   console.log(`LOGGED`);
   next(); // 서버가 요청을 걸러내는 것
 };
+*/
 
 /*
 const home = (req, res) => { // request : 브라우저에 요청한 정보. response : 브라우저에서 응답하는 정보. next : 사용하지 않으므로 넣지 않음.
