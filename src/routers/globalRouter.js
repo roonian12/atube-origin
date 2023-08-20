@@ -3,7 +3,7 @@ import express from "express" // 전체 파일을 import 하는 방법
 // import {login} from "../controllers/userController.js"; // login을 가져옴import
 // 위 두 줄을 한 줄로 표시하는 방법
 import { join, login } from "../controllers/userController.js";
-import { trendings, search } from "../controllers/videoController.js";
+import { trendings } from "../controllers/videoController.js";
 
 
 const globalRouter = express.Router();
@@ -28,7 +28,6 @@ globalRouter.get("/join", (req, res) => {
   */
 
   globalRouter.get("/", trendings);
-  globalRouter.get("/search", search);
   globalRouter.get("/join", join); // import한 join을 가져옴. 사용하지 않는 변수가 있다면 흐리게 처리를 하는데 주석처리한 부분을 해당 코드로 바꿔주면 흐릿하게 사라짐
   globalRouter.get("/login", login);
 // (req, res) =>{ res.send('Search!!! {globalRouter}')} => 이 부분을 위에서 import한 것으로 바꿈

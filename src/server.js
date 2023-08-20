@@ -15,6 +15,7 @@ const logger = morgan("dev");
 app.set('views', process.cwd() + '/src/views');
 app.set('view engine', 'pug');
 app.use(logger);
+app.use(express.urlencoded({ extended : true }))
 
 /*
 const middleWare = (req, res, next) =>{

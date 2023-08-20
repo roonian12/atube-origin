@@ -1,6 +1,18 @@
 extends base.pug
 include mixins/video.pug
 
+block login
+      if mockUser.loggedIn
+        small Hello #{mockUser.username}
+      nav
+        ul
+          if mockUser.loggedIn
+            li
+              a(href="/login") Log out
+          else
+            li
+              a(href="/login") Log in
+
 block content
   h1 Welcome Btube #{videos.length}
   ul

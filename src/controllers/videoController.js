@@ -33,15 +33,36 @@ const videos = [
 
 ];
 
+
 export const trendings = (req, res) => res.render("home", { pageTitle : "Home", mockUser, videos });
 // templates engine에게 맡기려면 send가 아니라 render 함수를 사용한다. base.pug를 인자로 호출한다.
-export const search = (req, res) => res.send("search video!! {videoController}");
-// send의 특징은 문자열을 그대로 반환한다.
 
-export const upload = (req, res) => res.send("upload video!! {videoController}");
-export const see = (req, res) => {
-    res.send(`videos ${req.params.id} watch video!! {videoController}`);
+export const watch = (req, res) => {
+    // const id = req.params.id;
+    // const title = req.params.title;
+    const { id } = req.params; // ES6 스타일
+    console.log(`id ::: ${id}`)
+    const video = videos[id - 1]
+    res.render("watch", { pageTitle : "Watch", video : video });
+    // res.send(`videos ${req.params.id} watch video!! {videoController}`);
 }
 // id의 형식을 제한할 필요가 있다. 아무 형식이나 들어가면 안되기 때문에 "(영문자+)숫자"로 형식을 제한하고자 한다. => 정규 표현식을 사용
-export const edit = (req, res) => {res.send(` videos ${req.params.id} edit!! {videoController}`);}
-export const remove = (req, res) => {res.send(` videos ${req.params.id} remove!! {videoController}`);}
+
+export const getEdit = (req, res) => {
+    const { id } = req.params; // ES6 스타일
+    console.log(`id ::: ${id}`)
+    const video = videos[id - 1]
+    res.render("edit", { pageTitle : "Edit", video : video });
+}
+
+export const postEdit = (req, res) => {
+    const { id } = req.params;
+    console.log(`id ::: ${id}`)
+    const { title } = req.body;
+    console.log(req.body)
+    const video = videos[id - 1]
+    videos[id - 1].title = title;
+    return res.redirect(`/videos/${id}`)
+}
+
+export const upload = (req, res) => res.send("upload video!! {videoController}");
