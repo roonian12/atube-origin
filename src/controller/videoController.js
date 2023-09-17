@@ -9,20 +9,28 @@ export const home = async(req, res) => {
         return res.render("server-error");
     }
 }
-export const watch = (req, res) => {
+export const watch = async(req, res) => {
     const { id } = req.params;
     console.log(`id ::: ${id}`);
-    return res.render("watch", { pageTitle: `Watching: ${id}`});    
+    const video = await Video.findById(id);
+    return res.render("watch", { pageTitle: `Watching: ${id}`, video });    
 }
-export const getEdit = (req, res) => {
+export const getEdit = async(req, res) => {
     const { id } = req.params;
     console.log(`id ::: ${id}`);
-    return res.render("edit", { pageTitle: `Editing: ${id}`});
+    const video = await Video.findById(id);
+    return res.render("edit", { pageTitle: `Editing: ${video.title}`, video });
 }
-export const postEdit = (req, res) => {
+export const postEdit = async(req, res) => {
     const { id } = req.params;
-    const { title } = req.body;
+    const { title, description, hashtags } = req.body;
     console.log(req.body);
+    console.log(`hashtags ::: ${hashtags}`);
+    await Video.findByIdAndUpdate(id, {
+        title,
+        description,
+        hashtags : hashtags.split(",").map((word) => word.startsWith("#") ? word : `#${word}`)
+    });
     return res.redirect(`/videos/${id}`);
 }
 export const getUpload = (req, res) => {
@@ -33,7 +41,7 @@ export const postUpload = async(req, res) => {
     const { title, description, hashtags } = req.body;
     const video = await new Video({
         title: title,
-        decription: description,
+        description: description,
         hashtags: hashtags.split(",").map((word) => `#${word}`),
         meta: {
             views: 0,
