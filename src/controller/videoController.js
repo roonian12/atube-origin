@@ -4,7 +4,7 @@ export const home = async(req, res) => {
     try{
         const videos = await Video.find({});
         console.log("videos", videos);
-        return res.render("home", { pageTitle: "home", videos });
+        return res.render("Home", { pageTitle: "Home", videos });
     } catch {
         return res.render("server-error");
     }
@@ -43,6 +43,7 @@ export const postUpload = async(req, res) => {
         title: title,
         description: description,
         hashtags: hashtags.split(",").map((word) => `#${word}`),
+        //createdAt: createdAt,
         meta: {
             views: 0,
             rating: 0,
@@ -52,5 +53,23 @@ export const postUpload = async(req, res) => {
     video.save();
     return res.redirect("/");
 }
-export const search = (req, res) => res.send("Search");
-export const deleteVideo = (req, res) => res.send("delete Video");
+export const deleteVideo = async (req, res) => {
+    const { id } = req.params;
+    console.log(`delete id ::: ${id}`);
+    await Video.findByIdAndDelete(id);
+    return res.redirect("/");
+};
+export const search = async(req, res) => {
+    const { keyword } = req.query;
+    let videos = [];
+    console.log(`search keyword ::: ${keyword}`);
+    if(keyword){
+        videos = await Video.find({
+            title: {
+                $regex: new RegExp(`${keyword}`, "i")
+            },
+        });
+    }
+    console.log(`search keyword => `, videos);
+    return res.render("search", { pageTitle: `Search Video`, videos });
+};
